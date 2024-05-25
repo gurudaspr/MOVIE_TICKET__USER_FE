@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ToggleTheme from '../../ui/ToggleTheme';
 
-const Navbar = () => {
+const UserNavbar = () => {
   const links = [
-    { name: 'HOME', path: '/' },
-    { name: 'MOVIES', path: '/movies' },
+    { name: 'HOME', path: '/home' },
+    { name: 'MOVIES', path: '/userHome' },
+    { name: 'MY BOOKINGS', path: '/bookings'}
   ];
 
   return (
@@ -39,11 +40,11 @@ const Navbar = () => {
 
       <div className="navbar-end gap-3">
         <ToggleTheme />
-        <Link to="/signup" className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">SIGNUP</Link>
+        <Link  className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link>
       </div>
 
     </div>
   );
 };
 
-export default Navbar;
+export default UserNavbar;

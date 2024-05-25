@@ -21,8 +21,8 @@ export default function Signup() {
     })
     const onSubmit = async (data) => {
         try {
-            await axios.post( "http://localhost:5000/api/user/signup", data, { withCredentials: true, }, );
-            navigate("/movies");
+            await axios.post( "api/user/signup", data, { withCredentials: true, }, );
+            navigate("/userHome");
         } catch (error) {
             console.log(error); 
         }

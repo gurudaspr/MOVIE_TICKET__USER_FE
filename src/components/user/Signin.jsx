@@ -18,8 +18,8 @@ export default function Signin() {
     })
     const onSubmit = async (data) => {
         try {
-          const res =  await axios.post( "http://localhost:5000/api/user/signin", data, { withCredentials: true, }, );
-            navigate("/movies");
+          const res =  await axios.post( "api/user/signin", data, { withCredentials: true, }, );
+            navigate("/userHome");
         } catch (error) {
             console.log(error); 
         }

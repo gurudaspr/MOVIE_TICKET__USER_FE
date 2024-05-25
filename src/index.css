@@ -9,3 +9,7 @@
     transition-duration: 500ms;
     transition-timing-function: ease-in-out;
 }
+
+*{
+    font-family: monospace;
+}

@@ -11,8 +11,8 @@ export default function Hero() {
                     alt="Cinema"
                 />
                 <div className="lg:mr-8">
-                    <h1 className="text-5xl font-bold ">Welcome to FilmGooo... !</h1>
-                    <p className="py-6">Experience the magic of cinema with the latest box office hits. Book your tickets now and enjoy an unforgettable movie experience!</p>
+                    <h1 className="text-5xl font-bold ">Welcome to  <span className='text-primary'>FilmGooo... !</span></h1>
+                    <p className="text-xl py-6">Experience the magic of cinema with the latest box office hits. Book your tickets now and enjoy an unforgettable movie experience!</p>
                   <Link to={'/movies'}>  <button className="btn bg-primary border-none text-primary-content hover:bg-primary-hover" >BOOK NOW</button> </Link>
                 </div>
             </div>

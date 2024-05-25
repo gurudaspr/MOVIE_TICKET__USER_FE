@@ -1,5 +1,5 @@
 import React from 'react'
-import Signin from '../components/forms/Signin'
+import Signin from '../components/user/Signin'
 
 export default function Signinpage() {
   return (
