@@ -8,7 +8,7 @@ const Movie = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('api/movies', { withCredentials: true });
+        const response = await axios.get('/api/movies', { withCredentials: true });
         console.log('Data:', response.data);
         setMovies(response.data);
       } catch (error) {
