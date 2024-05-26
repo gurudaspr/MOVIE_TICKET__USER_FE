@@ -40,7 +40,7 @@ const UserNavbar = () => {
 
       <div className="navbar-end gap-3">
         <ToggleTheme />
-        <Link  className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link>
+        <Link  to='/logout' className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link>
       </div>
 
     </div>

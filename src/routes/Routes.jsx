@@ -7,58 +7,67 @@ import Signinpage from "../pages/Signinpage";
 import SignupPage from "../pages/SignupPage";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import ShowSeat from "../components/user/ShowSeat";
+import EasyMethod from "../protectRoute/EasyMethod";
+import UserRoutes from "../protectRoute/UserRoutes";
+import Logout from "../protectRoute/Logout";
 
 
 
- export  const routes = [
-    {
-      element: <HomeLayout />,
-      children: [
-        {
-          path: "/",
-          element: <Hero />,
-        },
-        {
-          path: "/movies",
-          element: <MoviePage/>,
-        },
-        {
-          path: "/signup",
-          element : <SignupPage/>
-        },
-        {
-          path: "/signin",
-          element : <Signinpage/>
-        }
-        
-      ]
+export const routes = [
+  {
+    element: <HomeLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Hero />,
+      },
+      {
+        path: "/movies",
+        element: <MoviePage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />
+      },
+      {
+        path: "/signin",
+        element: <Signinpage />
+      }
 
-  
-    },
-    {
-      element: <UserLayout />,
-      children: [
-        {
-          path: "/home",
-          element: <Hero />,
-        },
-        {
-          path: "/userHome",
-          element: <MoviePage/>,
-        },
-        {
-          path: "/movie/:id",
-          element: <MovieDetailPage/>
-        },
-        {
-          path: "/shows/:id",
-          element: <ShowsPage/>
-        },
-        {
-          path: "/showSeat/:showId",
-          element: <ShowSeat/>
-        }
-      ],
-    },
-  
+    ]
+
+
+  },
+  {
+    element: <EasyMethod><UserLayout /></EasyMethod>,
+    children: [
+      {
+        path: "/home",
+        element: <Hero />,
+      },
+      {
+        path: "/userHome",
+        element:<UserRoutes><MoviePage /></UserRoutes> 
+      },
+      {
+        path: "/movie/:id",
+        element: <UserRoutes><MovieDetailPage /></UserRoutes>
+      },
+      {
+        path: "/shows/:id",
+        element: <UserRoutes>
+          <ShowsPage />
+        </UserRoutes>
+      },
+      {
+        path: "/showSeat/:showId",
+        element: <UserRoutes><ShowSeat /></UserRoutes>
+      },
+      {
+        path:'/logout',
+        element:<Logout/>
+      }
+    ],
+  },
+
 ];

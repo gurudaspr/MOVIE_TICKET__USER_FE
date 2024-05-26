@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router for navigation
+import axios from '../../config/axiosConfig';
+import { Link } from 'react-router-dom';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -8,9 +8,9 @@ const Movie = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/movies', { withCredentials: true });
+        const response = await axios.get('/api/movies');
         console.log('Data:', response.data);
-        setMovies(response.data);
+        setMovies(response.data); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
