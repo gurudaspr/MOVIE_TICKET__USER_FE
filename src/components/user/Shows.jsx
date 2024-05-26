@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios from '../../config/axiosConfig';
+import axios from 'axios';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { baseUrl } from '../../baseUrl/baseUrl';
 
 export default function Shows() {
         const [shows, setShows] = useState([]);
@@ -12,7 +13,7 @@ export default function Shows() {
           const fetchShows = async () => {
             try {
               const formattedDate = selectedDate.toISOString().split('T')[0];
-              const response = await axios.get(`/api/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
+              const response = await axios.get(`${baseUrl}/api/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
               setShows(response.data);
               console.log('Shows:', response.data);
               setMovieTitle(response.data[0].movieName)

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from '../../config/axiosConfig';
+
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../../baseUrl/baseUrl';
+import axios from 'axios';
 
 const Movie = () => {
   const [movies, setMovies] = useState([]);
@@ -8,7 +10,7 @@ const Movie = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/movies');
+        const response = await axios.get(`${baseUrl}/api/movies`,{withCredentials: true});
         console.log('Data:', response.data);
         setMovies(response.data); 
       } catch (error) {

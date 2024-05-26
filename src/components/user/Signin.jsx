@@ -2,8 +2,9 @@ import React from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from '../../config/axiosConfig';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../baseUrl/baseUrl';
 
 
 const userSchema = yup.object({
@@ -18,7 +19,7 @@ export default function Signin() {
     })
     const onSubmit = async (data) => {
         try {
-          const res =  await axios.post( "api/user/signin", data, { withCredentials: true, }, );
+          const res =  await axios.post( `${baseUrl}/api/user/signin`, data, { withCredentials: true, }, );
             navigate("/userHome");
         } catch (error) {
             console.log(error); 

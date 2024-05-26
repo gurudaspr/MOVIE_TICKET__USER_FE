@@ -1,6 +1,8 @@
-import axios from '../config/axiosConfig'
+import axios from 'axios';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from '../baseUrl/baseUrl';
+
 
 const UserRoutes = ({ children }) => {
   const navigate = useNavigate();
@@ -9,11 +11,12 @@ const UserRoutes = ({ children }) => {
     const checkUser = async () => {
       try {
         const res = await axios.get(
-          "/api/user/check-user"
+          `${baseUrl}/api/user/check-user`,{ withCredentials: true}
         );
+        console.log('res', res);
 
         const data = res.data;
-        console.log(data);
+        console.log('datauser', data);
         
         if (data.success === false) {
           navigate("/signup", { replace: true });
@@ -24,7 +27,8 @@ const UserRoutes = ({ children }) => {
       }
     };
     checkUser();
-  }, [navigate]);
+  }, );
+  
 
   return children;
 };

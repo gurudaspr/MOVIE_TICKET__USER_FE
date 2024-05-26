@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../config/axiosConfig';
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { selectedSeatsState } from '../../store/SeatAtom';
 import { useRecoilState } from 'recoil';
+import { baseUrl } from '../../baseUrl/baseUrl';
 
 export default function ShowSeat() {
   const [seats, setSeats] = useState([]);
@@ -13,7 +14,7 @@ export default function ShowSeat() {
   useEffect(() => {
     const fetchSeatingPattern = async () => {
       try {
-        const response = await axios.get(`/api/show-seats/${showId}`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}//api/show-seats/${showId}`, { withCredentials: true });
         console.log('Data:', response.data);
         setSeats(response.data.showSeating);
         setPrice(response.data.price);

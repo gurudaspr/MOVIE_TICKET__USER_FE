@@ -1,6 +1,8 @@
-import axios from '../../config/axiosConfig';
+
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { baseUrl } from '../../baseUrl/baseUrl';
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -9,7 +11,7 @@ export default function MovieDetail() {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`/api/movie-details/${id}`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}/api/movie-details/${id}`, { withCredentials: true });
         console.log('Movie details:', response.data);
         setMovie(response.data);
       } catch (error) {

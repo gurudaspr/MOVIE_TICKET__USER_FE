@@ -7,7 +7,6 @@ import Signinpage from "../pages/Signinpage";
 import SignupPage from "../pages/SignupPage";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import ShowSeat from "../components/user/ShowSeat";
-import EasyMethod from "../protectRoute/EasyMethod";
 import UserRoutes from "../protectRoute/UserRoutes";
 import Logout from "../protectRoute/Logout";
 
@@ -39,7 +38,7 @@ export const routes = [
 
   },
   {
-    element: <EasyMethod><UserLayout /></EasyMethod>,
+    element: <UserRoutes> <UserLayout /></UserRoutes> ,
     children: [
       {
         path: "/home",
@@ -47,21 +46,21 @@ export const routes = [
       },
       {
         path: "/userHome",
-        element:<UserRoutes><MoviePage /></UserRoutes> 
+        element:<MoviePage />
       },
       {
         path: "/movie/:id",
-        element: <UserRoutes><MovieDetailPage /></UserRoutes>
+        element: <MovieDetailPage />
       },
       {
         path: "/shows/:id",
-        element: <UserRoutes>
+        element:
           <ShowsPage />
-        </UserRoutes>
+       
       },
       {
         path: "/showSeat/:showId",
-        element: <UserRoutes><ShowSeat /></UserRoutes>
+        element: <ShowSeat />
       },
       {
         path:'/logout',

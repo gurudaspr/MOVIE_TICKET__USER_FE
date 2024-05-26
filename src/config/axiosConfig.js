@@ -1,8 +1,8 @@
-import axios from 'axios';
+// import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'https://movie-ticket-main-be.onrender.com',
-  withCredentials: true, 
-});
+// const instance = axios.create({
+//   baseURL: 'https://movie-ticket-main-be.onrender.com',
+//   withCredentials: true, 
+// });
 
-export default instance;
+// export default instance;
