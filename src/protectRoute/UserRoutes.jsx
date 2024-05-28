@@ -19,17 +19,16 @@ const UserRoutes = ({ children }) => {
         console.log('datauser', data);
         
         if (data.success === false) {
-          navigate("/signup", { replace: true });
+          navigate("/signin", { replace: true });
         }
       } catch (error) {
         console.error("Error occurred while checking user:", error);
-        navigate("/signup", { replace: true });
+        navigate("/signin", { replace: true });
       }
     };
     checkUser();
   }, );
   
-
   return children;
 };
 

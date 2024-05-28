@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 export default function Hero() {
     return (
         <div className="hero min-h-screen bg-base-100 ">
-            <div className="hero-content flex-col lg:flex-row-reverse animate-pulse-fade-in">
+            <div className="hero-content flex-col lg:flex-row-reverse animate-fade-in">
                 <img 
-                    src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.jpg" 
-                    className=" max-w-lg  rounded-lg shadow-2xl " 
+                    src="/hero-img.svg" 
+                    className="max-w-lg bg-base-100"
                     alt="Cinema"
                 />
                 <div className="lg:mr-8">
