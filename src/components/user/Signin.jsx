@@ -13,7 +13,7 @@ import toast from 'react-hot-toast';
 
 const userSchema = yup.object({
     email: yup.string().required('Please enter your email').email('Please enter a valid email'),
-    password: yup.string().required('Please enter your password').min(8, 'Password must be at least 8 characters long'),
+    password: yup.string().required('Please enter your password')
 });
 
 export default function Signin() {
