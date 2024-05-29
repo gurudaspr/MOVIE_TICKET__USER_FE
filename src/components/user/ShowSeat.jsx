@@ -46,8 +46,8 @@ export default function ShowSeat() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen overflow-x-auto animate-fade-in">
-    <div className="py-32">
+    <div className='container mx-auto px-5 '>
+    <div className="flex justify-center items-center  h-[80vh] overflow-x-auto animate-fade-in">
       <div className="rounded-lg p-10 min-w-96 w-auto min-h-72 h-auto flex flex-col gap-2">
         {seats.map((row, rowIndex) => (
           <div key={rowIndex} className="row flex justify-between">
@@ -75,8 +75,11 @@ export default function ShowSeat() {
             ))}
           </div>
         ))}
-      </div>
-      <div className="flex flex-row justify-between items-center mt-4">
+      </div> 
+    
+  </div>
+  <div className="divider"></div>
+      <div className="flex flex-row justify-between items-center ">
           <h1 className='text-left text-2xl mr-5'>Amount: {selectedSeats.length * price}</h1>
           {/* <h2 className='text-left text-2xl'> {selectedSeats.join(', ')}</h2> */}
           
@@ -88,7 +91,6 @@ export default function ShowSeat() {
             Book Seat
           </button>
           </div>
-    </div>
-  </div>
+</div>
   );
 }
