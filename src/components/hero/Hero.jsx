@@ -3,19 +3,16 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
     return (
-        <div className="hero min-h-screen bg-base-100 ">
-            <div className="hero-content flex-col lg:flex-row-reverse animate-fade-in">
-                <img 
-                    src="/hero-img.svg" 
-                    className="max-w-lg bg-base-100"
-                    alt="Cinema"
-                />
-                <div className="lg:mr-8">
-                    <h1 className="text-5xl font-bold ">Welcome to  <span className='text-primary'>FilmGooo... !</span></h1>
-                    <p className="text-xl py-6">Experience the magic of cinema with the latest box office hits. Book your tickets now and enjoy an unforgettable movie experience!</p>
-                  <Link to={'/movies'}>  <button className="btn bg-primary border-none text-primary-content hover:bg-primary-hover" >BOOK NOW</button> </Link>
-                </div>
-            </div>
-        </div>
+        <div className="hero h-screen" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D )'}}>
+  <div className="hero-overlay  w-full bg-base-300 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-20 "></div>
+  <div className="hero-content text-center text-white">
+    <div className="max-w-full">
+      <h1 className="mb-5 text-3xl md:text-5xl lg:text-8xl   text-primary-content font-bold">Welcome <span className='text-primary'>Filmgooo...!</span></h1>
+
+      <p className="mb-5 md:text-2xl text-primary-content"> Book your tickets now and enjoy an unforgettable movie experience!</p>
+      <Link to={'/movies'}>  <button className="btn bg-primary  border-none text-primary-content hover:bg-primary-hover" >BOOK NOW</button> </Link>
+    </div>
+  </div>
+</div>
     );
 }

@@ -11,7 +11,6 @@ const Movie = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/movies`,{withCredentials: true});
-        console.log('Data:', response.data);
         setMovies(response.data); 
       } catch (error) {
         console.error('Error fetching data:', error);

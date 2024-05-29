@@ -13,10 +13,11 @@ const UserRoutes = ({ children }) => {
         const res = await axios.get(
           `${baseUrl}/api/user/check-user`,{ withCredentials: true}
         );
-        console.log('res', res);
-
         const data = res.data;
         console.log('datauser', data);
+        if (data.success) {
+          navigate('/home', { replace: true });
+        }
         
         if (data.success === false) {
           navigate("/signin", { replace: true });
@@ -27,7 +28,7 @@ const UserRoutes = ({ children }) => {
       }
     };
     checkUser();
-  }, );
+  },[navigate] );
   
   return children;
 };

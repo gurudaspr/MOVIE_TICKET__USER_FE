@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
+import { movieTitleState } from '../../store/movieTitleAtom';
+import { useRecoilValue } from 'recoil';
 
-export default function Shows() {
+export default function Shows({}) {
         const [shows, setShows] = useState([]);
         const [selectedDate, setSelectedDate] = useState(new Date());
-        const [movieTitle, setMovieTitle] = useState('');
+        const movieTitle = useRecoilValue(movieTitleState);
         const { id } = useParams();
         const navigate = useNavigate();
         useEffect(() => {
@@ -16,7 +18,7 @@ export default function Shows() {
               const response = await axios.get(`${baseUrl}/api/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
               setShows(response.data);
               console.log('Shows:', response.data);
-              setMovieTitle(response.data[0].movieName)
+      
             } catch (error) {
               console.error('Error fetching shows:', error);
             }

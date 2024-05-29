@@ -14,8 +14,8 @@ export default function ShowSeat() {
   useEffect(() => {
     const fetchSeatingPattern = async () => {
       try {
-        const response = await axios.get(`${baseUrl}//api/show-seats/${showId}`, { withCredentials: true });
-        console.log('Data:', response.data);
+        const response = await axios.get(`${baseUrl}/api/show-seats/${showId}`, { withCredentials: true });
+        console.log(response.data);
         setSeats(response.data.showSeating);
         setPrice(response.data.price);
  
@@ -57,7 +57,7 @@ export default function ShowSeat() {
               </div>
             )}
             {row.map((seat, seatIndex) => (
-              <React.Fragment key={seatIndex}>
+              <div key={seatIndex}>
                 {seat !== null ? (
                   <div
                     className={`seat w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm 
@@ -71,7 +71,7 @@ export default function ShowSeat() {
                 ) : (
                   <div className="h-6 w-6 mr-1 lg:mr-5  " />
                 )}
-              </React.Fragment>
+              </div>
             ))}
           </div>
         ))}

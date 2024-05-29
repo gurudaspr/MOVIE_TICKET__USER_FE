@@ -3,10 +3,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
+import { useRecoilState } from 'recoil';
+import { movieTitleState } from '../../store/movieTitleAtom';
 
 export default function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
+  const [movieTitle , setMovieTitle] =  useRecoilState(movieTitleState);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -14,6 +17,7 @@ export default function MovieDetail() {
         const response = await axios.get(`${baseUrl}/api/movie-details/${id}`, { withCredentials: true });
         console.log('Movie details:', response.data);
         setMovie(response.data);
+        setMovieTitle(response.data.title);
       } catch (error) {
         console.error('Error fetching movie details:', error);
       }

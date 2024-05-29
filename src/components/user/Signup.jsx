@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
+import toast from 'react-hot-toast';
 
 
 const userSchema = yup.object({
@@ -17,15 +18,25 @@ const userSchema = yup.object({
 
 export default function Signup() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(userSchema),
     })
     const onSubmit = async (data) => {
         try {
-            await axios.post(  `${baseUrl}/api/user/signup`, data, { withCredentials: true, }, );
-            navigate("/userHome");
+            setLoading(true);
+            const res =  await axios.post(  `${baseUrl}/api/user/signup`, data, { withCredentials: true, }, );
+            toast.success(res.data.message);
+            navigate("/signin");
+            setLoading(false);
         } catch (error) {
-            console.log(error); 
+            console.log(error);
+            if (error.response && error.response.data && error.response.data.error) {
+                toast.error(error.response.data.error);
+            } else {
+                toast.error('Failed to sign up. Please try again.');
+            }
+            setLoading(false);
         }
     };
     return (
@@ -55,7 +66,7 @@ export default function Signup() {
                     </div>
                     <div className="my-3">
 
-                        <input type="text" placeholder="Password" className="input input-bordered input-primary w-72"
+                        <input type="password" placeholder="Password" className="input input-bordered input-primary w-72"
                             {...register("password")} />
                         {errors.password && (
                             <span className="text-error block text-sm mt-1 ml-2">
@@ -64,7 +75,7 @@ export default function Signup() {
                         )}
                     </div>
                     <div className="my-3">
-                        <input type="text" placeholder="Confirm Password" className="input input-bordered input-primary w-72"
+                        <input type="password" placeholder="Confirm Password" className="input input-bordered input-primary w-72"
                             {...register("confirmPassword")} />
                         {errors.confirmPassword && (
                             <span className="text-error block  text-sm mt-1 ml-2">
@@ -73,7 +84,7 @@ export default function Signup() {
                         )}
                     </div>
                     <div className="my-3">
-                        <button className="btn btn-primary w-72">Signup</button>
+                    <button className="btn btn-primary w-72"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Signup"}</button>
                     </div>
                     <Link to="/signin" className="text-right w-72  hover:underline">
                         Already have an account?

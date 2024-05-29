@@ -9,6 +9,7 @@ import MovieDetailPage from "../pages/MovieDetailPage";
 import ShowSeat from "../components/user/ShowSeat";
 import UserRoutes from "../protectRoute/UserRoutes";
 import Logout from "../protectRoute/Logout";
+import AuthChecker from "../protectRoute/AuthChecker";
 
 
 
@@ -18,7 +19,7 @@ export const routes = [
     children: [
       {
         path: "/",
-        element: <Hero />,
+        element: <AuthChecker><Hero /></AuthChecker>
       },
       {
         path: "/movies",
