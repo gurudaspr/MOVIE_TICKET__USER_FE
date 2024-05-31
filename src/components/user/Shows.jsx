@@ -56,7 +56,7 @@ export default function Shows({}) {
         
       
         return (
-          <div className="container  mx-auto  px-5 py-20 animate-fade-in">
+          <div className="container h-screen mx-auto  px-5 py-20 animate-fade-in">
             <h1 className="text-3xl font-semibold mb-4">{movieTitle}</h1>
             <div className="flex mb-4">
               {renderDateTabs()}

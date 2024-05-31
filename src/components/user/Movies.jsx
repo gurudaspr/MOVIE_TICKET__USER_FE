@@ -21,7 +21,7 @@ const Movie = () => {
   }, []);
 
   return (
-    <div className='container pt-20 mx-auto'>
+    <div className='container h-screen pt-20 mx-auto'>
       <div className="flex justify-center">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 p-4 animate-fade-in">
           {movies.map((movie, index) => (

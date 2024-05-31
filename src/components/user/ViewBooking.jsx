@@ -1,0 +1,65 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { baseUrl } from '../../baseUrl/baseUrl';
+
+const ViewBooking = () => {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/api/view-booking`, { withCredentials: true });
+        setBookings(response.data);
+        console.log('Bookings:', response.data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+      }
+    };
+
+    fetchBookings();
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-base-100 p-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">Booking List</h1>
+      <div className="space-y-4">
+        {bookings.map((booking) => (
+          <div key={booking.id} className="card bg-base-200 w-full max-w-4xl bg-white shadow-xl p-4 rounded-lg mx-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">{booking.movieName}</h2>
+              <span className="badge badge-lg badge-info">{booking.showDate}</span>
+            </div>
+            <div className="divider"></div>
+            <div className="flex flex-wrap justify-between">
+              <div className="w-full md:w-auto mb-2 lg:w-1/2">
+                <span className="font-semibold">Booking ID: </span>
+                <span>{booking.id}</span>
+              </div>
+              <div className="w-full md:w-auto mb-2 lg:w-1/2">
+                <span className="font-semibold">Theater: </span>
+                <span>{booking.theaterName}</span>
+              </div>
+              <div className="w-full md:w-auto mb-2 lg:w-1/2">
+                <span className="font-semibold">Show Date: </span>
+                <span>{new Date(booking.showDate).toLocaleDateString()}</span>
+              </div>
+              <div className="w-full md:w-auto mb-2 lg:w-1/2">
+                <span className="font-semibold">Show Time: </span>
+                <span>{booking.showTime}</span>
+              </div>
+              <div className="w-full md:w-auto mb-2 lg:w-1/2">
+                <span className="font-semibold">Booked Seats: </span>
+                <span>{booking.seats ? booking.seats.join(', ') : 'No booked seats'}</span>
+              </div>
+              <div className="w-full md:w-auto mb-2 lg:w-1/2 text-right">
+                <button className="btn btn-success text-primary-content">Add Review</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default ViewBooking;

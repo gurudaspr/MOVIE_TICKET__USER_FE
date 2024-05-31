@@ -1,6 +1,6 @@
-import recoil from 'recoil';
+import  { atom } from 'recoil';
 
-export const userIdState  = recoil.atom({
-    key: 'userId',
+export const userIdState  = atom({
+    key: 'userIdState',
     default: '',
 });
