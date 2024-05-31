@@ -1,13 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate,} from 'react-router-dom';
 import ToggleTheme from '../../ui/ToggleTheme';
+import axios from 'axios';
+import { baseUrl } from '../../baseUrl/baseUrl';
+import toast from 'react-hot-toast';
+import { set } from 'react-hook-form';
 
 const UserNavbar = () => {
+  const navigate = useNavigate();
   const links = [
     { name: 'HOME', path: '/home' },
     { name: 'MOVIES', path: '/userHome' },
     { name: 'MY BOOKINGS', path: '/bookings'}
   ];
+  const handleLogout = async () => {
+    try {
+     await axios.post(`${baseUrl}/api/user/logout`,'',{  withCredentials: true });
+      toast.success('Logged out successfully');
+
+      navigate('/signin', { replace: true });
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  }
 
   return (
     <div className="navbar bg-base-200 h-10 fixed z-50">
@@ -40,7 +55,8 @@ const UserNavbar = () => {
 
       <div className="navbar-end gap-3">
         <ToggleTheme />
-        <Link  to='/logout' className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link>
+        {/* <Link  to='/logout' className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT</Link> */}
+        <button onClick={handleLogout} className="btn bg-primary text-primary-content border-none hover:bg-primary-hover ">LOGOUT </button>
       </div>
 
     </div>

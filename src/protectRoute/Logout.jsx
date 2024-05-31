@@ -11,7 +11,7 @@ const Logout = () => {
   useEffect(() => {
     const logout = async () => {
       try {
-        await axios.get(`${baseUrl}/api/user/logout`,{ withCredentials: true});
+        await axios.post(`${baseUrl}/api/user/logout`,{ withCredentials: true});
 
         toast.success('Logged out successfully');
         navigate('/signin', { replace: true });
