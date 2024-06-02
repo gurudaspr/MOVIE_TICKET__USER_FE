@@ -31,7 +31,7 @@ export default function MovieDetail() {
   }
   const yellowStars = Math.floor(movie.avgRating);
   return (
-    <div className='container h-screen mx-auto pt-20'>
+    <div className='container h-full lg:h-screen mx-auto pt-20'>
       <div className="grid grid-cols-12 gap-6 p-6 rounded-lg bg-base-100 animate-fade-in">
         <div className="col-span-12 lg:col-span-6 lg:text-left ">
           <img src={movie.image} alt={movie.title} className="max-w-full lg:max-w-sm mx-auto rounded-lg" />
@@ -45,7 +45,7 @@ export default function MovieDetail() {
             <div className="flex items-center mb-2">
               <div className="rating  gap-1">
                 {[1, 2, 3, 4, 5].map((star, index) => (
-                  <input key={index} type="radio" name="avgRating" disabled className={`mask mask-heart ${index < yellowStars ? 'bg-warning' : ''} ${index < yellowStars ? 'checked' : ''}`} />
+                  <input key={index} type="radio" name="avgRating" disabled className={`mask mask-star ${index < yellowStars ? 'bg-warning' : ''} ${index < yellowStars ? 'checked' : ''}`} />
                   
                 ))}
               </div>

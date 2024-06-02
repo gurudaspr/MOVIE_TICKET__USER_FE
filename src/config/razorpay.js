@@ -2,8 +2,8 @@ import axios from 'axios';
 import { baseUrl } from '../baseUrl/baseUrl';
 import toast from 'react-hot-toast';
 
-export const createOrder = async (amount) => {
-  const response = await axios.post(`${baseUrl}/api/create-order`, { amount }, { withCredentials: true });
+export const createOrder = async (amount,selectedSeats,showId) => {
+  const response = await axios.post(`${baseUrl}/api/create-order`, {amount, selectedSeats,showId}, { withCredentials: true });
   console.log(response.data.order, 'order');
   return response.data.order;
   

@@ -34,20 +34,23 @@ export default function ShowSeat() {
   const handleSeat = (rowIndex, seatIndex) => {
     const newSeats = [...seats];
     const seat = newSeats[rowIndex][seatIndex];
-
-    if (seat.status === 'available') {
+  
+    if (seat.status === 'available' ||  seat.status === 'reserved') {
       if (selectedSeats.length < 6) {
-        seat.status = 'selected';
+        seat.status = 'selected' ;
         setSelectedSeats([...selectedSeats, seat.seat]);
       } else {
         toast.error('You can only book up to 6 seats at a time.');
       }
     } else if (seat.status === 'selected') {
-      seat.status = 'available';
-      setSelectedSeats(selectedSeats.filter(selectedSeat => selectedSeat !== seat.seat));
+      seat.status = 'available'|| 'reserved';
+      const updatedSelectedSeats = selectedSeats.filter(selectedSeat => selectedSeat !== seat.seat);
+      setSelectedSeats(updatedSelectedSeats);
     }
     setSeats(newSeats);
+    console.log(selectedSeats, 'selectedSeats');
   };
+  
 
   const handleBooking = async () => {
     try {
@@ -55,7 +58,7 @@ export default function ShowSeat() {
         toast.error('Please select a seat to book.');
         return;
       }
-      const order = await createOrder(selectedSeats.length * price);
+      const order = await createOrder(selectedSeats.length * price,selectedSeats,showId);
       handlePayment(order, async (paymentId, razorpay_signature) => {
         const bookingData = {
           showId,
@@ -66,21 +69,33 @@ export default function ShowSeat() {
           orderId: order.id,
         };
 
-        const response = await axios.post(`${baseUrl}/api/verify-payment`, bookingData, { withCredentials: true });
-
-        if (response.status === 200) {
-          setSelectedSeats([]);
-          toast.success('Booking successful!');
-          navigate('/bookings')
-
-
-        } else {
-          toast.error('Booking failed. Please try again.');
+        try {
+          const response = await axios.post(`${baseUrl}/api/verify-payment`, bookingData, { withCredentials: true });
+  
+          if (response.status === 200) {
+            setSelectedSeats([]);
+            toast.success('Booking successful!');
+            navigate('/bookings');
+          } else {
+            toast.error('Booking failed. Please try again.');
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 400) {
+            toast.error(error.response.data.message);
+          } else {
+            console.error('Error during booking:', error);
+            toast.error('Booking failed. Please try again.');
+          }
         }
       });
     } catch (error) {
       console.error('Error during booking:', error);
-      toast.error('Booking failed. Please try again.');
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        console.error('Error during booking:', error);
+        toast.error('Booking failed. Please try again.');
+      }
     }
   };
 
@@ -100,10 +115,10 @@ export default function ShowSeat() {
                   {seat !== null ? (
                     <div
                       className={`seat w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm 
-                        ${seat.status === 'booked' ? 'bg-base-300' : seat.status === 'selected' ? 'bg-success' : 'bg-info'}
-                        ${seat.status !== 'booked' ? 'hover:bg-success' : ''}`}
-                      style={{ cursor: seat.status === 'booked' ? 'default' : 'pointer' }}
-                      onClick={() => seat.status !== 'booked' && handleSeat(rowIndex, seatIndex)}
+                        ${seat.status === 'booked' || seat.status === 'reserved' ? 'bg-base-300' : seat.status === 'selected' ? 'bg-success' : 'bg-info'}
+                        ${seat.status === 'booked' || seat.status === 'reserved' ? '' : 'hover:bg-success'}`}
+                      style={{ cursor: seat.status === 'booked' || seat.status === 'reserved' ? 'default' : 'pointer' }}
+                      onClick={() => seat.status === 'available' && handleSeat(rowIndex, seatIndex)}
                     >
                       <span className="text-xs text-primary-content">{seat.seat.slice(1)}</span>
                     </div>

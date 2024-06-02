@@ -7,7 +7,6 @@ import Signinpage from "../pages/Signinpage";
 import SignupPage from "../pages/SignupPage";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import UserRoutes from "../protectRoute/UserRoutes";
-import Logout from "../protectRoute/Logout";
 import AuthChecker from "../protectRoute/AuthChecker";
 import ShowSeatPage from "../pages/ShowSeatPage";
 import ViewBookingPage from "../pages/ViewBookingPage";
@@ -68,10 +67,6 @@ export const routes = [
         path: "/bookings",
         element: <ViewBookingPage/>
       },
-      {
-        path:'/logout',
-        element:<Logout/>
-      }
     ],
   },
 
