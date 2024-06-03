@@ -8,14 +8,15 @@ import ReviewModal from './ReviewModel'
 const ViewBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [selectedMovieName, setSelectedMovieName] = useState(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/view-booking`, { withCredentials: true });
         const sortedBookings = response.data.sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate));
-        const reversedBookings = sortedBookings.reverse();    
-        console.log('Reversed Bookings:', reversedBookings); 
+        const reversedBookings = sortedBookings.reverse();
         setBookings(reversedBookings);
       } catch (error) {
         console.error('Error fetching bookings:', error);
@@ -23,19 +24,26 @@ const ViewBooking = () => {
     };
 
     fetchBookings();
-}, []);
+  }, []);
+
   const isShowStarted = (showDate, showTime) => {
     const combinedDateTimeString = `${showDate} ${showTime}`;
-      const showDateTime = parse(combinedDateTimeString, "yyyy-MM-dd h:mm a", new Date());
-    return(showDateTime <= new Date());
-};
-const handleOpenModal = () => {
-  setShowModal(true);
-};
-const handleCloseModal = () => {
-  setShowModal(false);
-};
- 
+    const showDateTime = parse(combinedDateTimeString, "yyyy-MM-dd h:mm a", new Date());
+    return (showDateTime <= new Date());
+  };
+
+  const handleOpenModal = (movieId, movieName) => {
+    setSelectedMovieId(movieId);
+    setSelectedMovieName(movieName);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedMovieId(null);
+    setSelectedMovieName(null);
+  };
+
   return (
     <div className="min-h-screen bg-base-100 p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">Booking List</h1>
@@ -44,7 +52,9 @@ const handleCloseModal = () => {
           <div key={booking.id} className="card bg-base-200 w-full max-w-4xl bg-white shadow-xl p-4 rounded-lg mx-auto">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold">{booking.movieName}</h2>
-              <span className="badge badge-lg badge-info  text-primary-content">{format(new Date(booking.showDate), "d MMMM yyyy")}</span>
+              <span className="badge badge-lg badge-info text-primary-content">
+                {format(new Date(booking.showDate), "d MMMM yyyy")}
+              </span>
             </div>
             <div className="divider"></div>
             <div className="flex flex-wrap justify-between">
@@ -70,14 +80,14 @@ const handleCloseModal = () => {
               </div>
               <div className="w-full md:w-auto mb-2 lg:w-1/2 text-right">
                 {isShowStarted(booking.showDate, booking.showTime) && (
-                  <button onClick={() => handleOpenModal()} className="btn btn-success text-primary-content">Add Review</button>
+                  <button onClick={() => handleOpenModal(booking.movieId, booking.movieName)} className="btn btn-success text-primary-content">Add Review</button>
                 )}
               </div>
             </div>
           </div>
         ))}
       </div>
-      {showModal && <ReviewModal booking={bookings.MovieId} onClose={handleCloseModal} />}
+      <ReviewModal isOpen={showModal} onClose={handleCloseModal} movieId={selectedMovieId} movieName={selectedMovieName} />
     </div>
   );
 };

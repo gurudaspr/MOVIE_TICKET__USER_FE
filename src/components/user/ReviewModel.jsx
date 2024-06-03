@@ -1,79 +1,82 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
 
-const ReviewModal = ({ booking, onClose }) => {
-  const [reviewText, setReviewText] = useState('');
-  const [rating, setRating] = useState(0); // State to manage rating
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const reviewData = {
-        movie: booking.movieId,
-        movieName: booking.movieName,
-        review: reviewText,
-        rating: rating ,
-      };
+const schema = yup.object().shape({
+  rating: yup.number().required('Rating is required').min(1).max(5),
+  review: yup.string().min(3).max(50).optional(),
+});
 
-      await axios.post(`${baseUrl}/api/add-review`, reviewData);
-      alert('Review added successfully');
-      onClose();
-    } catch (error) {
-      console.error('Error adding review:', error);
-      alert('Failed to add review. Please try again.');
-    }
+const ReviewModal = ({ isOpen, onClose, movieId, movieName }) => {
+  const { control, handleSubmit, reset, formState: { errors } } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async(data) => {
+    console.log('Submitting review:', { ...data, movieId });
+    await axios.post(`${baseUrl}/api/add-review`, { ...data, movieId },{ withCredentials: true });
+    reset();
+    onClose();
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
   };
 
   return (
-    <>
-      <input type="checkbox" id="review_modal" className="modal-toggle" />
-      <div className="modal">
-        <div className="modal-box">
-          <h3 className="text-lg font-bold">Add Review</h3>
-          <p className="py-4">Write your review for {}</p>
-          <form onSubmit={handleSubmit}>
-            <div className="mt-4">
-              <label htmlFor="review" className="block text-sm font-medium text-gray-700">Review</label>
-              <textarea
-                id="review"
-                rows="3"
-                value={reviewText}
-                onChange={(e) => setReviewText(e.target.value)}
-                className="mt-1 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                required
-              ></textarea>
-            </div>
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700">Rating</label>
-              <div className="rating">
-                {[1, 2, 3, 4, 5].map((value) => (
-                  <input
-                    key={value}
-                    type="radio"
-                    name="rating-4"
-                    className="mask mask-star-2 bg-green-500"
-                    checked={rating === value}
-                    onChange={() => setRating(value)}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="mt-4">
-              <button
-                type="submit"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm"
-              >
-                Submit Review
-              </button>
-            </div>
-          </form>
-          <div className="modal-action">
-            <label htmlFor="review_modal" className="btn" onClick={onClose}>Close</label>
+    <div className={`modal ${isOpen ? 'modal-open ' : ''}`}>
+      <div className="modal-box">
+        <h2 className="font-bold text-lg">Add Review : {movieName}</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="py-4 text-center">
+            <Controller
+              name="rating"
+              control={control}
+              defaultValue={undefined}
+              render={({ field }) => (
+                <div className="rating rating-md ">
+                  {[1, 2, 3, 4, 5].map((value) => (
+                    <input
+                      key={value}
+                      type="radio"
+                      name="rating"
+                      className={`mask mask-star-2 ${field.value >= value ? 'bg-warning' : 'bg-neutral-content'} text-3xl`}
+                      checked={field.value === value}
+                      onChange={() => field.onChange(value)}
+                    />
+                  ))}
+                </div>
+              )}
+            />
+            {errors.rating && <p className="text-error">{errors.rating.message}</p>}
+            <Controller
+              name="review"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <div>
+                  <textarea
+                    {...field}
+                    className="textarea textarea-bordered w-full mt-4"
+                    placeholder="Write your review here (optional)..."
+                  ></textarea>
+                  {errors.review && <p className="text-error">{errors.review.message}</p>}
+                </div>
+              )}
+            />
           </div>
-        </div>
+          <div className="modal-action">
+            <button type="button" className="btn" onClick={handleClose}>Cancel</button>
+            <button type="submit" className="btn btn-primary">Submit Review</button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

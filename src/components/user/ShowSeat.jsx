@@ -34,22 +34,26 @@ export default function ShowSeat() {
   const handleSeat = (rowIndex, seatIndex) => {
     const newSeats = [...seats];
     const seat = newSeats[rowIndex][seatIndex];
+    let newSelectedSeats = [...selectedSeats];
   
-    if (seat.status === 'available' ||  seat.status === 'reserved') {
-      if (selectedSeats.length < 6) {
-        seat.status = 'selected' ;
-        setSelectedSeats([...selectedSeats, seat.seat]);
+    if (seat.status === 'available') {
+      if (newSelectedSeats.length < 6) {
+        seat.status = 'selected';
+        newSelectedSeats = [...newSelectedSeats, seat.seat];
       } else {
         toast.error('You can only book up to 6 seats at a time.');
       }
     } else if (seat.status === 'selected') {
-      seat.status = 'available'|| 'reserved';
-      const updatedSelectedSeats = selectedSeats.filter(selectedSeat => selectedSeat !== seat.seat);
-      setSelectedSeats(updatedSelectedSeats);
+      seat.status = 'available';
+      newSelectedSeats = newSelectedSeats.filter(selectedSeat => selectedSeat !== seat.seat);
     }
+  
     setSeats(newSeats);
-    console.log(selectedSeats, 'selectedSeats');
+    setSelectedSeats(newSelectedSeats);
+  
+    console.log(newSelectedSeats, 'selectedSeats');
   };
+  
   
 
   const handleBooking = async () => {
@@ -118,7 +122,7 @@ export default function ShowSeat() {
                         ${seat.status === 'booked' || seat.status === 'reserved' ? 'bg-base-300' : seat.status === 'selected' ? 'bg-success' : 'bg-info'}
                         ${seat.status === 'booked' || seat.status === 'reserved' ? '' : 'hover:bg-success'}`}
                       style={{ cursor: seat.status === 'booked' || seat.status === 'reserved' ? 'default' : 'pointer' }}
-                      onClick={() => seat.status === 'available' && handleSeat(rowIndex, seatIndex)}
+                      onClick={() => (seat.status === 'available' || seat.status === 'selected') && handleSeat(rowIndex, seatIndex)}
                     >
                       <span className="text-xs text-primary-content">{seat.seat.slice(1)}</span>
                     </div>
