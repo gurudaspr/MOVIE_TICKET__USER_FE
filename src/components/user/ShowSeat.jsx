@@ -110,7 +110,7 @@ export default function ShowSeat() {
           {seats.map((row, rowIndex) => (
             <div key={rowIndex} className="row flex justify-between">
               {row.some(seat => seat !== null) && (
-                <div className="row-label w-6">
+                <div className="row-label w-6 mr-2 ">
                   {row.find(seat => seat !== null).seat[0]}
                 </div>
               )}
