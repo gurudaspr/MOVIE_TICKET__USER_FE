@@ -105,12 +105,12 @@ export default function ShowSeat() {
 
   return (
     <div className='container h-screen mx-auto px-5 '>
-      <div className="flex justify-center items-center h-[80vh] overflow-x-auto animate-fade-in">
+      <div className="flex justify-center items-center h-[75vh] overflow-x-auto animate-fade-in">
         <div className="rounded-lg p-10 min-w-96 w-auto min-h-72 h-auto flex flex-col gap-2">
           {seats.map((row, rowIndex) => (
             <div key={rowIndex} className="row flex justify-between">
               {row.some(seat => seat !== null) && (
-                <div className="row-label w-6 mr-2 ">
+                <div className="row-label w-6 mr-2 pr-5 ">
                   {row.find(seat => seat !== null).seat[0]}
                 </div>
               )}
@@ -120,7 +120,7 @@ export default function ShowSeat() {
                     <div
                       className={`seat w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm 
                         ${seat.status === 'booked' || seat.status === 'reserved' ? 'bg-base-300' : seat.status === 'selected' ? 'bg-success' : 'bg-info'}
-                        ${seat.status === 'booked' || seat.status === 'reserved' ? '' : 'hover:bg-success'}`}
+                        ${seat.status === 'booked' || seat.status === 'reserved' ? '' : 'lg:hover:bg-success'}`}
                       style={{ cursor: seat.status === 'booked' || seat.status === 'reserved' ? 'default' : 'pointer' }}
                       onClick={() => (seat.status === 'available' || seat.status === 'selected') && handleSeat(rowIndex, seatIndex)}
                     >
@@ -134,6 +134,11 @@ export default function ShowSeat() {
             </div>
           ))}
         </div>
+      </div>
+      <div className=' flex justify-center mb-5'>
+      <span className="flex font-mono">
+        SCREEN THIS WAY
+      </span>
       </div>
       <div className=' flex justify-evenly'>
         <div className='flex felx-col'>
