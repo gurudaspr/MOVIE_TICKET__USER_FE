@@ -52,9 +52,9 @@ export default function MovieDetail() {
             <p className="text-lg mb-2"><strong>Language:</strong> {movie.language}</p>
             <p className="text-lg mb-2"><strong>Duration:</strong> {movie.duration} Minutes</p>
             <div className="flex items-center mb-2">
-              <div className="rating  gap-1">
+              <div className="rating  gap-1 pointer-events-none">
                 {[1, 2, 3, 4, 5].map((star, index) => (
-                  <input key={index} type="radio" name="avgRating" disabled className={`mask mask-star-2 ${index < yellowStars ? 'bg-warning' : ''} ${index < yellowStars ? 'checked' : ''}`} />
+                  <input key={index} type="radio" name="avgRating" disabled className={`  mask mask-star-2 ${index < yellowStars ? 'bg-warning' : ''} ${index < yellowStars ? 'checked' : ''}`} />
                   
                 ))
                 }

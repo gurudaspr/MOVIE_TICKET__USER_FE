@@ -8,7 +8,7 @@ import { baseUrl } from '../../baseUrl/baseUrl';
 
 const schema = yup.object().shape({
   rating: yup.number().required('Rating is required').min(1).max(5),
-  review: yup.string().min(3).max(50).optional(),
+  review: yup.string().max(50).optional(),
 });
 
 const ReviewModal = ({ isOpen, onClose, movieId, movieName }) => {
