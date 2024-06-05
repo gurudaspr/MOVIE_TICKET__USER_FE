@@ -105,7 +105,7 @@ export default function ShowSeat() {
 
   return (
     <div className='container h-screen mx-auto px-5 '>
-      <div className="flex justify-center items-center h-[75vh] overflow-x-auto animate-fade-in">
+      <div className="flex justify-center items-center h-[70vh] overflow-x-auto animate-fade-in">
         <div className="rounded-lg p-10 min-w-96 w-auto min-h-72 h-auto flex flex-col gap-2">
           {seats.map((row, rowIndex) => (
             <div key={rowIndex} className="row flex justify-between">
