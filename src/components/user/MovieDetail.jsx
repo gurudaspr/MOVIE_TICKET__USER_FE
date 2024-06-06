@@ -46,12 +46,12 @@ export default function MovieDetail() {
           <img src={movie.image} alt={movie.title} className="max-w-full lg:max-w-sm mx-auto rounded-lg" />
         </div>
         <div className="col-span-12 lg:col-span-6 flex flex-col justify-between lg:justify-start lg:text-left">
-          <div className="p-6">
+          <div className="pt-6">
             <h1 className="text-5xl font-bold mb-4">{movie.title}</h1>
-            <p className="text-lg mb-2"><strong>Genre:</strong> {movie.genre}</p>
-            <p className="text-lg mb-2"><strong>Language:</strong> {movie.language}</p>
-            <p className="text-lg mb-2"><strong>Duration:</strong> {movie.duration} Minutes</p>
-            <div className="flex items-center mb-2">
+            <p className="text-lg mb-2 ml-2"><strong>Genre:</strong> {movie.genre}</p>
+            <p className="text-lg mb-2 ml-2"><strong>Language:</strong> {movie.language}</p>
+            <p className="text-lg mb-2 ml-2"><strong>Duration:</strong> {movie.duration} Minutes</p>
+            <div className="flex items-center mb-2 ml-2">
               <div className="rating  gap-1 pointer-events-none">
                 {[1, 2, 3, 4, 5].map((star, index) => (
                   <input key={index} type="radio" name="avgRating" disabled className={`  mask mask-star-2 ${index < yellowStars ? 'bg-warning' : ''} ${index < yellowStars ? 'checked' : ''}`} />

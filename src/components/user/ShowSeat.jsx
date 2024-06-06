@@ -104,7 +104,7 @@ export default function ShowSeat() {
   };
 
   return (
-    <div className='container h-screen mx-auto px-5 '>
+    <div className='container h-screen mx-auto px-5 pt-5  '>
       <div className="flex justify-center items-center h-[70vh] overflow-x-auto animate-fade-in">
         <div className="rounded-lg p-10 min-w-96 w-auto min-h-72 h-auto flex flex-col gap-2">
           {seats.map((row, rowIndex) => (
@@ -153,8 +153,8 @@ export default function ShowSeat() {
 
       <div className="divider"></div>
       <div className="flex flex-row justify-between items-center">
-        <h1 className='text-left text-sm lg:text-2xl mr-5'>Price: {price} rs</h1>
-        <h1 className='text-left text-sm lg:text-2xl mr-5'>Total amount: {selectedSeats.length * price} rs</h1>
+        <h1 className='text-left text-sm md:text-xl lg:text-2xl mr-5'>Price: {price} rs</h1>
+        <h1 className='text-left text-sm md:text-xl lg:text-2xl mr-5'>Total: {selectedSeats.length * price} rs</h1>
         <button
           className="btn btn-primary mt-2 text-right"
           onClick={handleBooking}
