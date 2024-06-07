@@ -7,7 +7,7 @@ import { movieTitleState } from '../../store/movieTitleAtom';
 import ShowReview from './ShowReview';
 
 const Skeleton = () => (
-  <div className="grid grid-cols-12 gap-6 p-6 rounded-lg animate-pulse">
+  <div className="grid grid-cols-12 gap-6 p-6 rounded-lg ">
     <div className="col-span-12 lg:col-span-6 lg:text-left">
       <div className="skeleton bg-base-200 h-96 max-w-full lg:max-w-sm mx-auto rounded-lg"></div>
     </div>
@@ -51,7 +51,7 @@ export default function MovieDetail() {
 
   if (isLoading) {
     return (
-      <div className='container min-h-screen h-full lg:h-full mx-auto pt-20'>
+      <div className='container min-h-screen h-full lg:h-full mx-auto pt-20 animate-fade-in'>
         <Skeleton />
       </div>
     );
