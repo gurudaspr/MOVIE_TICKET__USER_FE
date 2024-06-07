@@ -35,7 +35,7 @@ export const handlePayment = async (order, callback) => {
       contact: ''
     },
     theme: {
-      color: '#3399cc'
+      color: '#f43f5e'
     }
   };
   console.log(options, 'options');

@@ -1,4 +1,3 @@
-// movieTitleAtom.js
 
 import { atom } from 'recoil';
 
