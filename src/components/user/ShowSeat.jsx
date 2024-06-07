@@ -4,8 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import toast from 'react-hot-toast';
 import { createOrder, handlePayment } from '../../config/razorpay';
-import { useRecoilValue } from 'recoil';
-import { userIdState } from '../../store/userAtom';
 import 'https://checkout.razorpay.com/v1/checkout.js';
 
 export default function ShowSeat() {
@@ -13,7 +11,6 @@ export default function ShowSeat() {
   const [price, setPrice] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [loading, setLoading] = useState(false);
-  const userId = useRecoilValue(userIdState);
   const { showId } = useParams();
   const navigate = useNavigate();
 

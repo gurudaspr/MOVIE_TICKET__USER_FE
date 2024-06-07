@@ -18,7 +18,7 @@ const UserNavbar = () => {
      await axios.post(`${baseUrl}/api/user/logout`,'',{  withCredentials: true });
       toast.success('Logged out successfully');
 
-      navigate('/signin', { replace: true });
+      navigate('/login', { replace: true });
     } catch (error) {
       console.error('Error logging out:', error);
     }

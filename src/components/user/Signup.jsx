@@ -86,7 +86,7 @@ export default function Signup() {
                     <div className="my-3">
                     <button className="btn btn-primary w-72"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Signup"}</button>
                     </div>
-                    <Link to="/signin" className="text-right w-72  hover:underline">
+                    <Link to="/login" className="text-right w-72  hover:underline">
                         Already have an account?
                     </Link>
 

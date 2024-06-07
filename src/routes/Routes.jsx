@@ -3,13 +3,14 @@ import HomeLayout from "../layout/HomeLayout";
 import UserLayout from "../layout/UserLayout";
 import MoviePage from "../pages/MoviePage";
 import ShowsPage from "../pages/ShowsPage";
-import Signinpage from "../pages/Signinpage";
 import SignupPage from "../pages/SignupPage";
 import MovieDetailPage from "../pages/MovieDetailPage";
 import UserRoutes from "../protectRoute/UserRoutes";
 import AuthChecker from "../protectRoute/AuthChecker";
 import ShowSeatPage from "../pages/ShowSeatPage";
 import ViewBookingPage from "../pages/ViewBookingPage";
+import LoginPage from '../pages/LoginPage';
+
 
 
 
@@ -30,8 +31,8 @@ export const routes = [
         element: <SignupPage />
       },
       {
-        path: "/signin",
-        element: <Signinpage />
+        path: "/login",
+        element: <LoginPage />
       }
 
     ]

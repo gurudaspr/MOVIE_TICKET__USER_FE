@@ -5,8 +5,6 @@ import * as yup from "yup";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
-import { useRecoilState } from 'recoil';
-import { userIdState } from '../../store/userAtom';
 import toast from 'react-hot-toast';
 
 
@@ -16,8 +14,7 @@ const userSchema = yup.object({
     password: yup.string().required('Please enter your password')
 });
 
-export default function Signin() {
-    const [userId, setUserId] = useRecoilState(userIdState);
+export default function Login() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -29,8 +26,6 @@ export default function Signin() {
             setLoading(true);
             const res = await axios.post(`${baseUrl}/api/user/signin`, data, { withCredentials: true, },);
             toast.success(res.data.message);
-            const { userId } = res.data;
-            setUserId(userId);
             navigate("/userHome");
             setLoading(false);
         } catch (error) {
@@ -42,7 +37,7 @@ export default function Signin() {
     return (
         <div className="flex justify-center items-center h-screen">
             <div className="bg-base-200 shadow-lg rounded-lg p-8 animate-fade-in">
-                <h1 className="text-3xl font-bold text-center text-dark mb-4"><span className='text-primary'>FilmGo</span> Signin</h1>
+                <h1 className="text-3xl font-bold text-center text-dark mb-4"><span className='text-primary'>FilmGo</span> Login</h1>
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
 
                     <div className="my-3">
@@ -66,7 +61,7 @@ export default function Signin() {
                         )}
                     </div>
                     <div className="my-3">
-                        <button className="btn btn-primary w-72"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Signin"}</button>
+                        <button className="btn btn-primary w-72"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Login"}</button>
                     </div>
                     <Link to="/signup" className="text-right w-72  hover:underline">
                         Don't have an account?
