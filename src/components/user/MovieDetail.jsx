@@ -51,6 +51,7 @@ export default function MovieDetail() {
             <p className="text-lg mb-2 ml-2"><strong>Genre:</strong> {movie.genre}</p>
             <p className="text-lg mb-2 ml-2"><strong>Language:</strong> {movie.language}</p>
             <p className="text-lg mb-2 ml-2"><strong>Duration:</strong> {movie.duration} Minutes</p>
+            <p className="text-lg mb-2 ml-2"><strong>Release Date:</strong> {new Date(movie.releaseDate).toDateString()}</p>
             <div className="flex items-center mb-2 ml-2">
               <div className="rating  gap-1 pointer-events-none">
                 {[1, 2, 3, 4, 5].map((star, index) => (
@@ -61,11 +62,14 @@ export default function MovieDetail() {
                 <span className='text-lg'>({movie.reviews.length})</span>
               </div>
             </div>
-            <div className="text-right lg:text-left lg:pt-40">
+            <div className="text-right lg:text-left pt-5">
               <Link to={`/shows/${movie._id}`}>
                 <button className="btn btn-primary mt-4 lg:mt-0 self-end">BOOK TICKETS NOW</button>
               </Link>
+              <p className='pt-5 text-lg mb-2  text-left'>{movie.description}</p>
+
             </div>
+
           </div>
         </div>
       </div>

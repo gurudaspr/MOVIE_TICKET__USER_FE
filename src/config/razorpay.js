@@ -9,7 +9,9 @@ export const createOrder = async (amount,selectedSeats,showId) => {
   
 };
 
-export const handlePayment = (order, callback) => {
+export const handlePayment = async (order, callback) => {
+  const response = await axios.get(`${baseUrl}/api/user`, { withCredentials: true });
+  const userData = response.data;
   
 
   const options = {
@@ -28,9 +30,9 @@ export const handlePayment = (order, callback) => {
       }
     },
     prefill: {
-      name: 'Customer Name',
-      email: 'customer@example.com',
-      contact: '6282184257'
+      name: userData.name,
+      email:  userData.email,
+      contact: ''
     },
     theme: {
       color: '#3399cc'
