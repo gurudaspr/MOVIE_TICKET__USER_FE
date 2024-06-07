@@ -47,7 +47,7 @@ export default function MovieDetail() {
         </div>
         <div className="col-span-12 lg:col-span-6 flex flex-col justify-between lg:justify-start lg:text-left">
           <div className="pt-6">
-            <h1 className="text-5xl font-bold mb-4">{movie.title}</h1>
+            <h1 className="text-3xl  lg:text-4xl font-bold mb-4 break-words">{movie.title}</h1>
             <p className="text-lg mb-2 ml-2"><strong>Genre:</strong> {movie.genre}</p>
             <p className="text-lg mb-2 ml-2"><strong>Language:</strong> {movie.language}</p>
             <p className="text-lg mb-2 ml-2"><strong>Duration:</strong> {movie.duration} Minutes</p>

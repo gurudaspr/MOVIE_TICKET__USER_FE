@@ -55,7 +55,7 @@ const Movie = () => {
                 <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
               </figure>
               <div className="card-body p-4 flex flex-col justify-between">
-                <h2 className="card-title mb-2">{movie.title}</h2>
+                <h2 className="card-title mb-2 ">{movie.title}</h2>
                 <div className="flex justify-between">
                   <p className="text-left">{movie.language}</p>
                   <p className="text-right">{movie.genre}</p>
