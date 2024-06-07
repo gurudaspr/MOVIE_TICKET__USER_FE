@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import axios from 'axios';
+import { MovieSkeleton } from '../../ui/Skeletons';
+
 
 const Movie = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
@@ -31,16 +33,7 @@ const Movie = () => {
 
   const renderSkeletons = (count) => {
     return Array.from({ length: count }).map((_, index) => (
-      <div key={index} className="card w-72 bg-base-200 flex-shrink-0">
-        <figure className="skeleton w-full h-72"></figure>
-        <div className="card-body p-4 flex flex-col justify-between">
-          <div className="skeleton w-3/4 h-6 mb-2"></div>
-          <div className="flex justify-between">
-            <div className="skeleton w-1/4 h-6"></div>
-            <div className="skeleton w-1/4 h-6"></div>
-          </div>
-        </div>
-      </div>
+      <MovieSkeleton key={index} />
     ));
   };
 

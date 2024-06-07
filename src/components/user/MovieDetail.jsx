@@ -5,25 +5,8 @@ import { baseUrl } from '../../baseUrl/baseUrl';
 import { useRecoilState } from 'recoil';
 import { movieTitleState } from '../../store/movieTitleAtom';
 import ShowReview from './ShowReview';
+import { MovieDetailSkeleton } from '../../ui/Skeletons';
 
-const Skeleton = () => (
-  <div className="grid grid-cols-12 gap-6 p-6 rounded-lg ">
-    <div className="col-span-12 lg:col-span-6 lg:text-left">
-      <div className="skeleton bg-base-200 h-96 max-w-full lg:max-w-sm mx-auto rounded-lg"></div>
-    </div>
-    <div className="col-span-12 lg:col-span-6 flex flex-col justify-between lg:justify-start lg:text-left">
-      <div className="pt-6">
-        <div className="skeleton bg-base-200 h-8 w-3/4 mb-4"></div>
-        <div className="skeleton bg-base-200 h-6 w-28 mb-4"></div>
-        <div className="skeleton bg-base-200 h-6 w-full mb-4"></div>
-        <div className="skeleton bg-base-200 h-6 w-full mb-4"></div>
-        <div className="skeleton bg-base-200 h-6 w-full mb-4"></div>
-        <div className="skeleton bg-base-200 h-6 w-full mb-4"></div>
-        <div className="skeleton bg-base-200 h-10 w-full mb-4 "></div>
-      </div>
-    </div>
-  </div>
-);
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -52,7 +35,7 @@ export default function MovieDetail() {
   if (isLoading) {
     return (
       <div className='container min-h-screen h-full lg:h-full mx-auto pt-20 animate-fade-in'>
-        <Skeleton />
+        <MovieDetailSkeleton />
       </div>
     );
   }
@@ -102,7 +85,7 @@ export default function MovieDetail() {
           </div>
         </div>
       </div>
-      <ShowReview reviews={movie.reviews} />
+      <ShowReview reviews={movie.reviews} isLoading={isLoading}  />
     </div>
   );
 }

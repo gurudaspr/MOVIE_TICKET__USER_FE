@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
 import { baseUrl } from '../../baseUrl/baseUrl';
+import toast from 'react-hot-toast';
 
 
 const schema = yup.object().shape({
   rating: yup.number().required('Rating is required').min(1).max(5),
   review: yup.string().max(50).optional(),
+  
 });
 
 const ReviewModal = ({ isOpen, onClose, movieId, movieName }) => {
   const { control, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
-
+  const [loading, setLoading] = useState(false);
   const onSubmit = async(data) => {
-    console.log('Submitting review:', { ...data, movieId });
-    await axios.post(`${baseUrl}/api/add-review`, { ...data, movieId },{ withCredentials: true });
-    reset();
-    onClose();
+    setLoading(true);
+    try {
+      console.log('Submitting review:', { ...data, movieId });
+      await axios.post(`${baseUrl}/api/add-review`, { ...data, movieId },{ withCredentials: true });
+      toast.success('Review added succesfully')
+      reset();
+      onClose();
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    } finally {
+      setLoading(false);
+    }
   };
-
   const handleClose = () => {
     reset();
     onClose();
   };
+
 
   return (
     <div className={`modal ${isOpen ? 'modal-open ' : ''}`}>
@@ -72,7 +82,7 @@ const ReviewModal = ({ isOpen, onClose, movieId, movieName }) => {
           </div>
           <div className="modal-action">
             <button type="button" className="btn" onClick={handleClose}>Cancel</button>
-            <button type="submit" className="btn btn-primary">Submit Review</button>
+            <button className="btn btn-primary" disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Submit Review"}</button>
           </div>
         </form>
       </div>

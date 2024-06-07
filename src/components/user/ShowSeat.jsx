@@ -3,15 +3,16 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { baseUrl } from '../../baseUrl/baseUrl';
 import toast from 'react-hot-toast';
-import { createOrder, handlePayment } from '../../config/razorpay'
+import { createOrder, handlePayment } from '../../config/razorpay';
 import { useRecoilValue } from 'recoil';
 import { userIdState } from '../../store/userAtom';
-import 'https://checkout.razorpay.com/v1/checkout.js'
+import 'https://checkout.razorpay.com/v1/checkout.js';
 
 export default function ShowSeat() {
   const [seats, setSeats] = useState([]);
   const [price, setPrice] = useState(0);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [loading, setLoading] = useState(false);
   const userId = useRecoilValue(userIdState);
   const { showId } = useParams();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function ShowSeat() {
     const newSeats = [...seats];
     const seat = newSeats[rowIndex][seatIndex];
     let newSelectedSeats = [...selectedSeats];
-  
+
     if (seat.status === 'available') {
       if (newSelectedSeats.length < 6) {
         seat.status = 'selected';
@@ -47,22 +48,24 @@ export default function ShowSeat() {
       seat.status = 'available';
       newSelectedSeats = newSelectedSeats.filter(selectedSeat => selectedSeat !== seat.seat);
     }
-  
+
     setSeats(newSeats);
     setSelectedSeats(newSelectedSeats);
-  
+
     console.log(newSelectedSeats, 'selectedSeats');
   };
-  
-  
 
   const handleBooking = async () => {
     try {
+      setLoading(true);
       if (selectedSeats.length === 0) {
         toast.error('Please select a seat to book.');
+        setLoading(false); 
         return;
       }
-      const order = await createOrder(selectedSeats.length * price,selectedSeats,showId);
+      
+      const order = await createOrder(selectedSeats.length * price, selectedSeats, showId);
+      setLoading(false)
       handlePayment(order, async (paymentId, razorpay_signature) => {
         const bookingData = {
           showId,
@@ -72,10 +75,10 @@ export default function ShowSeat() {
           razorpay_signature,
           orderId: order.id,
         };
-
+        
         try {
           const response = await axios.post(`${baseUrl}/api/verify-payment`, bookingData, { withCredentials: true });
-  
+
           if (response.status === 200) {
             setSelectedSeats([]);
             toast.success('Booking successful!');
@@ -90,6 +93,8 @@ export default function ShowSeat() {
             console.error('Error during booking:', error);
             toast.error('Booking failed. Please try again.');
           }
+        } finally {
+          setLoading(false); 
         }
       });
     } catch (error) {
@@ -100,8 +105,10 @@ export default function ShowSeat() {
         console.error('Error during booking:', error);
         toast.error('Booking failed. Please try again.');
       }
+      setLoading(false); 
     }
   };
+
 
   return (
     <div className='container h-screen mx-auto px-5 pt-5  '>
@@ -156,10 +163,9 @@ export default function ShowSeat() {
         <h1 className='text-left text-sm md:text-xl lg:text-2xl mr-5'>Price: {price} rs</h1>
         <h1 className='text-left text-sm md:text-xl lg:text-2xl mr-5'>Total: {selectedSeats.length * price} rs</h1>
         <button
-          className="btn btn-primary mt-2 text-right"
+      
           onClick={handleBooking}
-        >
-          Book Seat
+          className="btn btn-primary w-28"disabled={loading}>{loading ? <span className='loading loading-spinner bg-primary '></span> : "Book Seat"}
         </button>
       </div>
     </div>
