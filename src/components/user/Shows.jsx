@@ -15,7 +15,7 @@ export default function Shows({}) {
           const fetchShows = async () => {
             try {
               const formattedDate = selectedDate.toISOString().split('T')[0];
-              const response = await axios.get(`${baseUrl}/api/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
+              const response = await axios.get(`${baseUrl}/api/user/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
               setShows(response.data);
               console.log('Shows:', response.data);
       

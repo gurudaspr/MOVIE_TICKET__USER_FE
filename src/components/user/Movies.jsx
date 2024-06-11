@@ -13,7 +13,7 @@ const Movie = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/movies`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}/api/user/movies`, { withCredentials: true });
         const currentDate = new Date();
         
         const nowPlaying = response.data.filter(movie => new Date(movie.releaseDate) <= currentDate);
@@ -59,25 +59,29 @@ const Movie = () => {
         </div>
       </div>
 
-      <h1 className="text-4xl font-bold mb-6 text-center mt-10">Upcoming</h1>
-      <div className="flex justify-center">
-        <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
-          {loading ? renderSkeletons(4) : upcomingMovies.map((movie, index) => (
-            <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
-              <figure>
-                <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
-              </figure>
-              <div className="card-body p-4 flex flex-col justify-between">
-                <h2 className="card-title mb-2">{movie.title}</h2>
-                <div className="flex justify-between">
-                  <p className="text-left">{movie.language}</p>
-                  <p className="text-right">{movie.genre}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+      {upcomingMovies.length > 0 && (
+        <>
+          <h1 className="text-4xl font-bold mb-6 text-center mt-10">Upcoming</h1>
+          <div className="flex justify-center">
+            <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
+              {loading ? renderSkeletons(4) : upcomingMovies.map((movie, index) => (
+                <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
+                  <figure>
+                    <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
+                  </figure>
+                  <div className="card-body p-4 flex flex-col justify-between">
+                    <h2 className="card-title mb-2">{movie.title}</h2>
+                    <div className="flex justify-between">
+                      <p className="text-left">{movie.language}</p>
+                      <p className="text-right">{movie.genre}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

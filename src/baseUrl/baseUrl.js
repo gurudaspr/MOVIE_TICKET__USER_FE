@@ -1,3 +1,3 @@
 
-export const baseUrl = 'https://movie-ticket-main-be.onrender.com';
-// export const baseUrl = 'http://localhost:5000';
+// export const baseUrl = 'https://movie-ticket-main-be.onrender.com';
+export const baseUrl = 'http://localhost:5000';

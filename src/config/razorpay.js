@@ -3,14 +3,14 @@ import { baseUrl } from '../baseUrl/baseUrl';
 import toast from 'react-hot-toast';
 
 export const createOrder = async (amount,selectedSeats,showId) => {
-  const response = await axios.post(`${baseUrl}/api/create-order`, {amount, selectedSeats,showId}, { withCredentials: true });
+  const response = await axios.post(`${baseUrl}/api/user/create-order`, {amount, selectedSeats,showId}, { withCredentials: true });
   console.log(response.data.order, 'order');
   return response.data.order;
   
 };
 
 export const handlePayment = async (order, callback) => {
-  const response = await axios.get(`${baseUrl}/api/user`, { withCredentials: true });
+  const response = await axios.get(`${baseUrl}/api/user/get-user`, { withCredentials: true });
   const userData = response.data;
   
 

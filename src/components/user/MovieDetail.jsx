@@ -17,7 +17,7 @@ export default function MovieDetail() {
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/movie-details/${id}`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}/api/user/movie-details/${id}`, { withCredentials: true });
         console.log('Movie details:', response.data);
         setMovie(response.data);
         console.log(response.data, 'movie');

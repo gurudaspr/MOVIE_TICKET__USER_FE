@@ -17,7 +17,7 @@ export default function ShowSeat() {
   useEffect(() => {
     const fetchSeatingPattern = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/show-seats/${showId}`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}/api/user/show-seats/${showId}`, { withCredentials: true });
         console.log(response.data);
         setSeats(response.data.showSeating);
         setPrice(response.data.price);
@@ -74,7 +74,7 @@ export default function ShowSeat() {
         };
         
         try {
-          const response = await axios.post(`${baseUrl}/api/verify-payment`, bookingData, { withCredentials: true });
+          const response = await axios.post(`${baseUrl}/api/user/verify-payment`, bookingData, { withCredentials: true });
 
           if (response.status === 200) {
             setSelectedSeats([]);

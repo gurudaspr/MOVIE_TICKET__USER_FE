@@ -17,7 +17,7 @@ const ViewBooking = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/view-booking`, { withCredentials: true });
+        const response = await axios.get(`${baseUrl}/api/user/view-booking`, { withCredentials: true });
         const sortedBookings = response.data.sort((a, b) => new Date(b.bookingDate) - new Date(a.bookingDate));
         const reversedBookings = sortedBookings.reverse();
         setBookings(reversedBookings);
