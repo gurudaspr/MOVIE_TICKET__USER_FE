@@ -42,7 +42,7 @@ const Movie = () => {
       <h1 className="text-4xl font-bold mb-6 text-center">Now Playing</h1>
       <div className="flex justify-center">
         <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
-          {loading ? renderSkeletons(4) : nowPlayingMovies.map((movie, index) => (
+          {loading ? renderSkeletons(8) : nowPlayingMovies.map((movie, index) => (
             <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
               <figure>
                 <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
