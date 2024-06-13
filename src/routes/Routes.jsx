@@ -20,7 +20,7 @@ export const routes = [
     children: [
       {
         path: "/",
-        element: <Hero />
+        element: <AuthChecker><Hero /></AuthChecker>
       },
       {
         path: "/movies",
