@@ -40,33 +40,32 @@ export const routes = [
 
   },
   {
-    element: <UserRoutes> <UserLayout /></UserRoutes> ,
+    element:  <UserLayout />,
     children: [
       {
         path: "/home",
-        element: <Hero />,
+        element: <UserRoutes><Hero />,</UserRoutes>
       },
       {
         path: "/userHome",
-        element:<MoviePage />
+        element:<UserRoutes><MoviePage /></UserRoutes>
       },
       {
         path: "/movie/:id",
-        element: <MovieDetailPage />
+        element: <UserRoutes><MovieDetailPage /></UserRoutes>
       },
       {
         path: "/shows/:id",
-        element:
-          <ShowsPage />
+        element: <UserRoutes><ShowsPage /> </UserRoutes>
        
       },
       {
         path: "/showSeat/:showId",
-        element: <ShowSeatPage />
+        element: <UserRoutes><ShowSeatPage /></UserRoutes>
       },
       {
         path: "/bookings",
-        element: <ViewBookingPage/>
+        element: <UserRoutes><ViewBookingPage/></UserRoutes>
       },
     ],
   },
