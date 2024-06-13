@@ -27,7 +27,7 @@ export default function Signup() {
             setLoading(true);
             const res =  await axios.post(  `${baseUrl}/api/user/signup`, data, { withCredentials: true, }, );
             toast.success(res.data.message);
-            navigate("/signin");
+            navigate("/login");
             setLoading(false);
         } catch (error) {
             console.log(error);
