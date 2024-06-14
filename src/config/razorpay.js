@@ -34,6 +34,9 @@ export const handlePayment = async (order, callback) => {
       email:  userData.email,
       contact: ''
     },
+    notes: {
+      customer_name: userData.name,
+    },
     theme: {
       color: '#f43f5e'
     }
