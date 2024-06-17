@@ -65,8 +65,8 @@ const ViewBooking = () => {
           {bookings.map((booking) => (
             <div key={booking.id} className="card bg-base-200 w-full max-w-4xl bg-white shadow-xl p-4 rounded-lg mx-auto">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold">{booking.movieName}</h2>
-                <span className="badge badge-lg badge-info text-primary-content">
+                <h2 className="text-xl w-3/4 font-bold">{booking.movieName}</h2>
+                <span className="badge badge-lg badge-info text-clip w-2/4 text-sm  text-primary-content">
                   {format(new Date(booking.showDate), "d MMMM yyyy")}
                 </span>
               </div>
