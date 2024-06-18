@@ -35,11 +35,11 @@ export default function ShowSeat() {
     let newSelectedSeats = [...selectedSeats];
 
     if (seat.status === 'available') {
-      if (newSelectedSeats.length < 6) {
+      if (newSelectedSeats.length < 10) {
         seat.status = 'selected';
         newSelectedSeats = [...newSelectedSeats, seat.seat];
       } else {
-        toast.error('You can only book up to 6 seats at a time.');
+        toast.error('You can only book up to 10 seats at a time.');
       }
     } else if (seat.status === 'selected') {
       seat.status = 'available';
@@ -122,7 +122,7 @@ export default function ShowSeat() {
                 <div key={seatIndex}>
                   {seat !== null ? (
                     <div
-                      className={`seat w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm 
+                      className={`seat w-6 h-6 mr-1 lg:mr-2 lg:mb-2 rounded-md cursor-pointer text-center text-sm 
                         ${seat.status === 'booked' || seat.status === 'reserved' ? 'bg-base-300' : seat.status === 'selected' ? 'bg-success' : 'bg-info'}
                         ${seat.status === 'booked' || seat.status === 'reserved' ? '' : 'lg:hover:bg-success'}`}
                       style={{ cursor: seat.status === 'booked' || seat.status === 'reserved' ? 'default' : 'pointer' }}
@@ -131,7 +131,7 @@ export default function ShowSeat() {
                       <span className="text-xs text-primary-content">{seat.seat.slice(1)}</span>
                     </div>
                   ) : (
-                    <div className="h-6 w-6 mr-1 lg:mr-5" />
+                    <div className="h-6 w-6 mr-1  lg:mr-2 lg:mb-2 " />
                   )}
                 </div>
               ))}
@@ -146,11 +146,11 @@ export default function ShowSeat() {
       </div>
       <div className=' flex justify-evenly'>
         <div className='flex felx-col'>
-          <div className=' w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm bg-info' ><span></span></div>
+          <div className=' w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md  text-center text-sm bg-info' ><span></span></div>
           <span>Available</span>
         </div>
         <div className='flex'>
-          <div className=' w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md cursor-pointer text-center text-sm bg-base-300' ></div>
+          <div className=' w-6 h-6 mr-1 lg:mr-5 lg:mb-5 rounded-md r text-center text-sm bg-base-300' ></div>
           <span>Booked</span>
         </div>
       </div>
