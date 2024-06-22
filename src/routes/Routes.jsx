@@ -36,15 +36,13 @@ export const routes = [
       }
 
     ]
-
-
   },
   {
     element:  <UserLayout />,
     children: [
       {
         path: "/home",
-        element: <UserRoutes><Hero />,</UserRoutes>
+        element: <UserRoutes><Hero /></UserRoutes>
       },
       {
         path: "/userHome",

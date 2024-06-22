@@ -12,7 +12,7 @@ const UserRoutes = ({ children }) => {
     const checkUser = async () => {
       try {
         const res = await axios.get(
-          `${baseUrl}/api/user/check-user`, { withCredentials: true }
+          `${baseUrl}/api/user/check-user`, { withCredentials: true,crossDomain: true}
         );
         const data = res.data;
         console.log('datauser', data);
