@@ -45,7 +45,7 @@ const Movie = () => {
           {loading ? renderSkeletons(8) : nowPlayingMovies.map((movie, index) => (
             <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
               <figure>
-                <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
+                <img src={movie.image} alt={movie.title} className="w-full h-72 object-fill" />
               </figure>
               <div className="card-body p-4 flex flex-col justify-between">
                 <h2 className="card-title mb-2 ">{movie.title}</h2>
@@ -67,7 +67,7 @@ const Movie = () => {
               {loading ? renderSkeletons(4) : upcomingMovies.map((movie, index) => (
                 <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
                   <figure>
-                    <img src={movie.image} alt={movie.title} className="w-full h-72 object-cover" />
+                    <img src={movie.image} alt={movie.title} className="w-full h-72 object-fill" />
                   </figure>
                   <div className="card-body p-4 flex flex-col justify-between">
                     <h2 className="card-title mb-2">{movie.title}</h2>

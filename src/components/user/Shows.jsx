@@ -62,7 +62,7 @@ export default function Shows() {
       <div className="divider"></div>
       <ul>
         {shows
-          .filter((show) => show.showTimes.length > 0) // Filter out theaters with no show times after current time
+          .filter((show) => show.showTimes.length > 0)
           .map((show) => (
             <li key={`${show.theater}-${show.movieTitle}`} className="py-4">
               <h2 className="text-xl font-semibold mb-1">{show.theater}</h2>
