@@ -4,18 +4,19 @@ import { baseUrl } from '../../baseUrl/baseUrl';
 import axios from 'axios';
 import { MovieSkeleton } from '../../ui/Skeletons';
 
-
 const Movie = () => {
   const [nowPlayingMovies, setNowPlayingMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [nowPlayingDisplayCount, setNowPlayingDisplayCount] = useState(4);
+  const [upcomingDisplayCount, setUpcomingDisplayCount] = useState(4);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/user/movies`, { withCredentials: true });
         const currentDate = new Date();
-        
+
         const nowPlaying = response.data.filter(movie => new Date(movie.releaseDate) <= currentDate);
         const upcoming = response.data.filter(movie => new Date(movie.releaseDate) > currentDate);
 
@@ -37,12 +38,22 @@ const Movie = () => {
     ));
   };
 
+  const handleNowPlayingLoadMore = () => {
+    setNowPlayingDisplayCount(prevCount => prevCount + 4);
+  };
+
+  const handleUpcomingLoadMore = () => {
+    setUpcomingDisplayCount(prevCount => prevCount + 4);
+  };
+
+  const isMobile = window.innerWidth <= 640;
+
   return (
     <div className='container min-h-screen h-full pt-20 mx-auto'>
-      <h1 className="text-4xl font-bold mb-6 text-center">Now Playing</h1>
+      <h1 className="text-3xl lg:text-4xl font-bold mb-6 text-center">Now Showing</h1>
       <div className="flex justify-center">
         <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
-          {loading ? renderSkeletons(8) : nowPlayingMovies.map((movie, index) => (
+          {loading ? renderSkeletons(nowPlayingDisplayCount) : nowPlayingMovies.slice(0, isMobile ? nowPlayingMovies.length : nowPlayingDisplayCount).map((movie, index) => (
             <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
               <figure>
                 <img src={movie.image} alt={movie.title} className="w-full h-72 object-fill" />
@@ -58,13 +69,26 @@ const Movie = () => {
           ))}
         </div>
       </div>
+      {!loading && nowPlayingMovies.length > nowPlayingDisplayCount && !isMobile && (
+        <div className="flex justify-center mt-4">
+          <button onClick={handleNowPlayingLoadMore} className="btn btn-outline btn-primary">Load More</button>
+        </div>
+      )}
+
+      {loading && (
+        <div className="flex justify-center mt-10">
+          <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
+            {renderSkeletons(nowPlayingDisplayCount)}
+          </div>
+        </div>
+      )}
 
       {upcomingMovies.length > 0 && (
         <>
-          <h1 className="text-4xl font-bold mb-6 text-center mt-10">Upcoming</h1>
+          <h1 className="text-3xl lg:text-4xl font-bold mb-6 text-center mt-10">Upcoming Release</h1>
           <div className="flex justify-center">
             <div className="flex gap-4 overflow-x-auto flex-nowrap p-4 animate-fade-in sm:grid sm:grid-cols-2 lg:grid-cols-4">
-              {loading ? renderSkeletons(4) : upcomingMovies.map((movie, index) => (
+              {loading ? renderSkeletons(upcomingDisplayCount) : upcomingMovies.slice(0, isMobile ? upcomingMovies.length : upcomingDisplayCount).map((movie, index) => (
                 <Link key={index} to={`/movie/${movie._id}`} className="card w-72 bg-base-200 flex-shrink-0">
                   <figure>
                     <img src={movie.image} alt={movie.title} className="w-full h-72 object-fill" />
@@ -80,6 +104,11 @@ const Movie = () => {
               ))}
             </div>
           </div>
+          {!loading && upcomingMovies.length > upcomingDisplayCount && !isMobile && (
+            <div className="flex justify-center mt-4 pb-4">
+              <button onClick={handleUpcomingLoadMore} className="btn btn-outline btn-primary">Load More</button>
+            </div>
+          )}
         </>
       )}
     </div>

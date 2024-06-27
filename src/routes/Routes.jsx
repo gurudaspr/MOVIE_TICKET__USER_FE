@@ -10,6 +10,7 @@ import AuthChecker from "../protectRoute/AuthChecker";
 import ShowSeatPage from "../pages/ShowSeatPage";
 import ViewBookingPage from "../pages/ViewBookingPage";
 import LoginPage from '../pages/LoginPage';
+import ErrorPage from "../pages/Errorpage";
 
 
 
@@ -33,6 +34,10 @@ export const routes = [
       {
         path: "/login",
         element: <LoginPage />
+      },
+      {
+        path: "*",
+        element: <ErrorPage />
       }
 
     ]
@@ -65,6 +70,7 @@ export const routes = [
         path: "/bookings",
         element: <UserRoutes><ViewBookingPage/></UserRoutes>
       },
+     
     ],
   },
 
