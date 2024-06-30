@@ -29,11 +29,11 @@ export const routes = [
       },
       {
         path: "/signup",
-        element: <SignupPage />
+        element:<AuthChecker><SignupPage /></AuthChecker> 
       },
       {
         path: "/login",
-        element: <LoginPage />
+        element: <AuthChecker><LoginPage /></AuthChecker>
       },
       {
         path: "*",

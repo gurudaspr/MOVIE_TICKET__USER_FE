@@ -11,13 +11,13 @@ const ErrorPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center text-center bg-base-100 pt-20 mx-auto">
-      <h1 className="text-6xl font-bold mb-6">404</h1>
-      <h2 className="text-3xl font-semibold mb-4">Page Not Found</h2>
-      
-      <p className="text-lg mb-6">Error: Cannot find what you are looking for</p>
-      
-      <button onClick={handleGoBack} className="btn btn-primary">Go Back</button>
-    </div>
+    <h1 className="text-6xl font-bold mb-6">404</h1>
+    <h2 className="text-xl md:text-3xl font-semibold mb-4">Uh oh! That page doesn't exist 😕</h2>
+    <p className="text-lg mb-6">
+      Looks like we couldn't find what you were looking for. But don't worry, you can:
+    </p>
+    <button onClick={handleGoBack} className="btn btn-primary">Go Back</button>
+  </div>
   );
 };
 
