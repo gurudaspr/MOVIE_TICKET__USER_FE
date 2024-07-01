@@ -18,9 +18,8 @@ export default function MovieDetail() {
     const fetchMovieDetails = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/user/movie-details/${id}`, { withCredentials: true });
-        console.log('Movie details:', response.data);
+      
         setMovie(response.data);
-        console.log(response.data, 'movie');
         setMovieTitle(response.data.title);
       } catch (error) {
         console.error('Error fetching movie details:', error);

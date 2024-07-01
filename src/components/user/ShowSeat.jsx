@@ -18,7 +18,7 @@ export default function ShowSeat() {
     const fetchSeatingPattern = async () => {
       try {
         const response = await axios.get(`${baseUrl}/api/user/show-seats/${showId}`, { withCredentials: true });
-        console.log(response.data);
+        
         setSeats(response.data.showSeating);
         setPrice(response.data.price);
       } catch (error) {
@@ -49,7 +49,7 @@ export default function ShowSeat() {
     setSeats(newSeats);
     setSelectedSeats(newSelectedSeats);
 
-    console.log(newSelectedSeats, 'selectedSeats');
+   
   };
 
   const handleBooking = async () => {

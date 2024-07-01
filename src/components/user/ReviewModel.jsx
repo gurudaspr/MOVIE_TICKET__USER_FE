@@ -21,7 +21,7 @@ const ReviewModal = ({ isOpen, onClose, movieId, movieName }) => {
   const onSubmit = async(data) => {
     setLoading(true);
     try {
-      console.log('Submitting review:', { ...data, movieId });
+      
       await axios.post(`${baseUrl}/api/user/add-review`, { ...data, movieId },{ withCredentials: true });
       toast.success('Review added succesfully')
       reset();

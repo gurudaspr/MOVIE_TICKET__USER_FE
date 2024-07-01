@@ -18,7 +18,7 @@ export default function Shows() {
         const formattedDate = selectedDate.toISOString().split('T')[0];
         const response = await axios.get(`${baseUrl}/api/user/shows?date=${formattedDate}&movieId=${id}`, { withCredentials: true });
         setShows(response.data);
-        console.log('Shows:', response.data);
+       
       } catch (error) {
         console.error('Error fetching shows:', error);
       }
