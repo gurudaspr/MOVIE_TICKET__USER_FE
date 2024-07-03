@@ -12,7 +12,7 @@ const AuthChecker = ({ children }) => {
         const res = await axios.get(`${baseUrl}/api/user/check-user`, { withCredentials: true });
         const data = res.data;
         
-        if (data.success) {
+        if (data.success===true) {
           navigate('/home', { replace: true });
         }
       } catch (error) {

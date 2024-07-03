@@ -15,7 +15,7 @@ const UserRoutes = ({ children }) => {
           `${baseUrl}/api/user/check-user`, { withCredentials: true}
         );
         const data = res.data;
-        if (data.success) {
+        if (data.success ===true) {
           setIsAuthenticated(true);
         } else {
           navigate("/login", { replace: true });
