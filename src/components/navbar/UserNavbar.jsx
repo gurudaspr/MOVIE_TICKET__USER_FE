@@ -41,7 +41,7 @@ const UserNavbar = () => {
             ))}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl"><img className="mask mask-squircle w-11 hidden sm:block " src='/filmgo.png' alt=""/>FilmGo</Link>
+        <Link to="/home" className="btn btn-ghost text-xl"><img className="mask mask-squircle w-11 hidden sm:block " src='/filmgo.png' alt=""/>FilmGo</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
