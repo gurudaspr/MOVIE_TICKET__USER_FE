@@ -18,12 +18,16 @@ const UserRoutes = ({ children }) => {
         if (data.success === true) {
           setIsAuthenticated(true);
         }
+        else{
+          navigate("/login", { replace: true });
+        }
       } catch (error) {
         console.error("Error occurred while checking user:", error);
         navigate("/login", { replace: true });
       } finally {
         setAuthChecked(true);
       }
+      
     };
     checkUser();
   }, [navigate]);
