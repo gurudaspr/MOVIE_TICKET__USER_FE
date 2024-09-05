@@ -67,7 +67,7 @@ const ViewBooking = () => {
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl w-3/4 font-bold">{booking.movieName}</h2>
                 <span className="badge badge-lg badge-info text-clip w-2/4  md:w-32 text-sm  text-primary-content">
-                  {format(new Date(booking.showDate), "d MMMM yyyy")}
+                  {format(new Date(booking.showDate), "d MMM yyyy")}
                 </span>
               </div>
               <div className="divider"></div>
